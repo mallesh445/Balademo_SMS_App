@@ -1,0 +1,133 @@
+<body>
+  <div class="wrapper">
+    <div *ngIf="showLoginPage">
+      <div class="row cLogin">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <form [formGroup]="loginform">
+            <div class="card ">
+              <div class="card-header card-header-primary card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">contacts</i>
+                </div>
+                <h4 class="card-title">Login Form</h4>
+                <br>
+              </div>
+              <div class="card-body ">
+                <div class="form-group bmd-form-group">
+                  <label for="exampleEmails"> Email Address</label>
+                  <input formControlName="email" type="email" class="form-control" id="inputEmail"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="padding-top: 14px">
+                  <!-- <label id="exampleEmails-error" class="error" for="exampleEmails">This field is
+                    required.</label> -->
+                  <div class="form-group row" *ngIf="!loginform.get('email').valid
+                                    &&
+                                    loginform.get('email').touched &&
+                                    loginform.get('email').errors?.required">
+                    <span class="help-block text-danger" id="errorEmailRequired">Email is required *</span>
+                  </div>
+                  <div class="form-group row" *ngIf="!loginform.get('email').valid
+                                    &&
+                                    loginform.get('email').touched &&
+                                    loginform.get('email').errors?.pattern">
+                    <span class="help-block text-danger" id="errorValidEmail">Please
+                      enter valid email</span>
+                  </div>
+                </div>
+                <br>
+                <div class="form-group bmd-form-group row">
+                  <label for="examplePasswords"> Password</label>
+                  <input formControlName="password" type="password" class="form-control" id="examplePasswords"
+                    required="true" name="password" aria-required="true" style="padding-top: 12px"
+                    pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$">
+                  <!-- <label id="examplePasswords-error" class="error" for="examplePasswords">This field is
+                    required.</label>-->
+                  <div class="form-group row" *ngIf="!loginform.get('password').valid
+                                    &&
+                                    loginform.get('password').touched &&
+                                    loginform.get('password').errors?.required">
+                    <span class="help-block text-danger" id="errorPasswordRequired">Password is required *</span>
+                  </div>
+                  <div class="form-group row" *ngIf="!loginform.get('password').valid
+                  &&
+                  loginform.get('password').touched &&
+                  loginform.get('password').errors?.pattern">
+                    <span class="help-block text-danger" id="errorValidEmail">Password should contain atleast 1 character, 1 number, 1 special character</span>
+                  </div>
+                </div>
+                <!-- <div class="category form-category">* Required fields</div> -->
+              </div>
+              <div class="card-footer ml-auto mr-auto">
+                <button (click)="onSubmit(loginform.value)" class="btn btn-primary btn-round"
+                  [disabled]="!loginform.valid">Login
+                </button>
+                <!-- <button *ngIf="!loginform.valid" (click)="onSubmit(loginform.value)" class="btn btn-rose" [disabled]=true>Login
+                </button> -->
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+
+    <div *ngIf="!showLoginPage">
+
+      <body>
+        <div class="wrapper ">
+          <app-nav-menu></app-nav-menu>
+          <div class="main-panel ps-container ps-theme-default">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+              <div class="container-fluid">
+                <div class="navbar-wrapper">
+                  <h3 class="help-block text-primary"><b>Welcome {{userName}}</b></h3>
+                </div>
+                <div class="collapse navbar-collapse justify-content-end">
+                  <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">person</i>
+                        <p class="d-lg-none d-md-block">
+                          Account
+                        </p>
+                        <div class="ripple-container"></div>
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+                        <a class="dropdown-item" href="">Profile</a>
+                        <a class="dropdown-item" href="">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="">Log out</a>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="content">
+              <div class="container-fluid">
+                <router-outlet></router-outlet>
+              </div>
+            </div>
+
+            <footer class="footer" style="padding-top: 2px">
+              <div class="container-fluid">
+                <nav class="float-left">
+                  <ul>
+                    <li>
+                      <a href="https://creative-tim.com/presentation">
+                        About Us
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </body>
+
+    </div>
+  </div>
+</body>

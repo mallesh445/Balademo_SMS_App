@@ -1,0 +1,333 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">ADD USER</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="userForm">
+              <div class="row" style="padding-top: 6px">
+                <div class="col-md-3">
+                  <div class="form-group bmd-form-group has-primary">
+                    <input type="hidden" class="form-control" formControlName="userId" name="userId" id="userId">
+                    <label class="bmd-label-static" id="UserId">Username</label>
+                    <input type="text" formControlName="Username" class="form-control" name="Username" id="UserId"
+                      required="true" aria-required="true" style="padding-top: 10px">
+                    <div class="form-group row" *ngIf="!userForm.get('Username').valid
+                                    &&
+                                    userForm.get('Username').touched &&
+                                    userForm.get('Username').errors?.required">
+                      <span class="help-block text-danger" id="errorUsernameRequired">Username is required *</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group bmd-form-group has-primary">
+                    <label class="bmd-label-static" id="EmailId">Email address</label>
+                    <input formControlName="email" type="email" class="form-control" id="inputEmail"
+                      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" style="padding-top: 10px">
+                    <div class="form-group row" *ngIf="!userForm.get('email').valid
+                    &&
+                    userForm.get('email').touched &&
+                    userForm.get('email').errors?.required">
+                      <span class="help-block text-danger" id="errorEmailRequired">Email is required *</span>
+                    </div>
+                    <div class="form-group row" *ngIf="!userForm.get('email').valid
+                    &&
+                    userForm.get('email').touched &&
+                    userForm.get('email').errors?.pattern">
+                      <span class="help-block text-danger" id="errorValidEmail">Please
+                        enter valid email</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group  bmd-form-group has-primary">
+                    <label class="bmd-label-static" id="PhoneId">Phone no</label>
+                    <input type="text" formControlName="Phone" class="form-control" name="Phone" id="PhoneId"
+                      required="true" aria-required="true" maxlength="10" (keypress)=_keyPress($event)
+                      style="padding-top: 10px">
+                    <div class="form-group row" *ngIf="!userForm.get('Phone').valid
+                                    &&
+                                    userForm.get('Phone').touched &&
+                                    userForm.get('Phone').errors?.required">
+                      <span class="help-block text-danger" id="errorPhoneRequired">Phone is required *</span>
+                    </div>
+                    <div class="form-group row" *ngIf="!userForm.get('Phone').valid
+                    &&
+                    userForm.get('Phone').touched &&
+                    userForm.get('Phone').errors?.pattern">
+                      <span class="help-block text-danger" id="errorPhoneRequired">Please enter valid number *</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Fist Name</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Last Name</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div> -->
+              <div class="row" style="padding-top: 6px">
+                <div class="col-md-12">
+                  <div class="form-group bmd-form-group has-primary">
+                    <label class="bmd-label-static" id="AddressId">Address</label>
+                    <input type="text" formControlName="Address" class="form-control" name="Address" id="UserId"
+                      required="true" aria-required="true" style="padding-top: 10px" style="padding-top: 10px">
+                    <div class="form-group row" *ngIf="!userForm.get('Address').valid
+                    &&
+                    userForm.get('Address').touched &&
+                    userForm.get('Address').errors?.required">
+                      <span class="help-block text-danger" id="errorAddressRequired">Address is required *</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="padding-top: 6px">
+                <div class="col-md-4">
+                  <div class="form-group bmd-form-group has-primary">
+                    <label class="bmd-label-static" id="UserId">City</label>
+                    <input type="text" formControlName="City" class="form-control" name="City" id="CityId"
+                      required="true" aria-required="true" style="padding-top: 10px">
+                    <div class="form-group row" *ngIf="!userForm.get('City').valid
+                                    &&
+                                    userForm.get('City').touched &&
+                                    userForm.get('City').errors?.required">
+                      <span class="help-block text-danger" id="errorCityRequired">City is required *</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group bmd-form-group has-primary">
+                    <label class="bmd-label-static" id="CountryId">Country</label>
+                    <input type="text" formControlName="Country" class="form-control" name="Country" id="CountryId"
+                      required="true" aria-required="true" style="padding-top: 10px">
+                    <div class="form-group row" *ngIf="!userForm.get('Country').valid
+                                    &&
+                                    userForm.get('Country').touched &&
+                                    userForm.get('Country').errors?.required">
+                      <span class="help-block text-danger" id="errorCityRequired">Country is required *</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <!-- <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>About Me</label>
+                      <div class="form-group">
+                        <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                        <textarea class="form-control" rows="5"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              <button *ngIf="showHidebtn" type="submit" class="btn btn-primary btn-round pull-right"
+                [disabled]="!userForm.valid" (click)="onAdd(userForm.value)" data-toggle="modal"
+                data-target="#exampleModal">Add User</button>
+              <button *ngIf="!showHidebtn" type="submit" class="btn btn-primary btn-round pull-right"
+                [disabled]="!userForm.valid" (click)="onUpdate(userForm.value)" data-toggle="modal"
+                data-target="#updateModal">Update User</button>
+              <button class="btn btn-primary btn-round pull-right" (click)="ResetForm()">Clear</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="card">
+  <div class="card-header card-header-primary">
+    <h4 class="card-title">USER DETAILS</h4>
+  </div>
+  <div class="card-content table-responsive table-full-width">
+    <table class="table">
+      <thead class="text-primary">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>City</th>
+        <th>Country</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of usersData">
+          <td>{{user.id}}</td>
+          <td>{{user.Username}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.Phone}}</td>
+          <td>{{user.City}}</td>
+          <td>{{user.Country}}</td>
+          <td class="td-actions">
+            <button type="button" title="" class="btn btn-primary btn-link btn-sm" (click)="EditUser()">
+              <i class="material-icons">edit</i>
+              <div class="ripple-container"></div>
+            </button>
+            <button type="button" title="" class="btn btn-danger btn-link btn-sm">
+              <i class="material-icons">close</i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<br />
+
+<div class="card">
+  <div class="card-header card-header-primary">
+    <h4 class="card-title">USER DETAILS</h4>
+  </div>
+  <div class="example-header card-content table-responsive table-full-width">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef class="text-primary" style="font-size: 0.95rem"> Id </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Progress Column -->
+      <ng-container matColumnDef="Username">
+        <mat-header-cell *matHeaderCellDef class="text-primary" style="font-size: 0.95rem;"> Username </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Username}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef class="text-primary" style="font-size: 0.95rem"> Email </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="Phone">
+        <mat-header-cell *matHeaderCellDef class="text-primary" style="font-size: 0.95rem"> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Phone}} </mat-cell>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="Address">
+      <mat-header-cell *matHeaderCellDef mat-sort-header class="text-primary" style="font-size: 0.95rem"> Address </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.Address}} </mat-cell>
+    </ng-container> -->
+
+      <ng-container matColumnDef="City">
+        <mat-header-cell *matHeaderCellDef class="text-primary" style="font-size: 0.95rem"> City </mat-header-cell>
+        <!-- mat-sort-header-->
+        <mat-cell *matCellDef="let row"> {{row.City}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Country">
+        <mat-header-cell *matHeaderCellDef class="text-primary" style="font-size: 0.95rem"> Country </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.Country}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="text-primary" style="font-size: 0.95rem"> </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button type="button" class="btn btn-primary btn-link btn-sm" (click)="EditUser(row)" matTooltip="Edit User">
+            <i class="material-icons">edit</i>
+          </button>
+          <button type="button" title="" class="btn btn-danger btn-link btn-sm" matTooltip="Delete User" data-toggle="modal"
+          data-target="#deleteModal" (click)="SetUserObjToDelete(row)">
+            <i class="material-icons">close</i>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="pageSize" [length]="totalSize" [pageSizeOptions]="[5, 10, 25, 100]"
+      [pageIndex]="currentPage" (page)="pageEvent = handlePage($event)"></mat-paginator>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align: center">
+        <h4 class="modal-title card-title" style="margin-left: 185px"><b>Confirmation</b></h4>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <h5 class="modal-title card-title"><b>Users data Added Successfully!!!</b> </h5>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        <button type="button" class="btn btn-success btn-round" data-dismiss="modal" (click)="ResetForm()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle" style="margin-left: 185px"><b>Confirmation</b></h5>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li *ngFor="let value of updatedValues">
+            <b>{{ value }}</b>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-round btn-sm" data-dismiss="modal"
+          (click)="ResetModalValues()">Close</button>
+        <button type="button" class="btn btn-success btn-round btn-sm" *ngIf="showHideUpdateModalbtn"
+          (click)="ResetForm()" data-dismiss="modal">ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align: center">
+        <h4 class="modal-title card-title" style="margin-left: 185px"><b>Confirmation</b></h4>
+        <input type="hidden" [value]="usrobj">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button> -->
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <h5 class="help-block text-danger"><b>Are you sure that you want to delete?</b> </h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">NO</button>
+        <button type="button" class="btn btn-success btn-round btn-sm" data-dismiss="modal" (click)="deletUser(usrobj)">YES</button>
+      </div>
+    </div>
+  </div>
+</div>

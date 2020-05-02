@@ -1,0 +1,5 @@
+<!-- <p-fullCalendar [events]="events" [options]="options">
+</p-fullCalendar> -->
+<ng-container>
+    <ng-fullcalendar #fullcalendar (dateClick)="dateClick($event)" (clickButton)="clickButton($event)" (eventDragStop)="eventDragStop($event)" [eventsModel]="eventsModel" [options]="options" (eventClick)="eventClick($event)"></ng-fullcalendar>
+</ng-container>
